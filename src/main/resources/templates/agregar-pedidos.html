@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Pedido</title>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registrar Nuevo Pedido</h2>
+    <p style="color: #666;">Completa los datos para generar una nueva orden.</p>
+    <hr>
+
+    <form th:action="@{/pedidos/guardar}" th:object="${pedido}" method="post">
+
+        <div class="form-group">
+            <label>ID del Cliente:</label>
+            <input type="number" th:field="*{id_cliente}" placeholder="Ingresa el ID del cliente" required />
+        </div>
+
+        <div class="form-group">
+            <label>Fecha del Pedido:</label>
+            <input type="date" th:field="*{fecha}" required />
+        </div>
+
+        <div class="form-group">
+            <label>Total de la Venta ($):</label>
+            <input type="number" step="0.01" th:field="*{total}" placeholder="0.00" required />
+        </div>
+
+        <div class="form-group">
+            <label>Estado Inicial:</label>
+            <select th:field="*{estado}">
+                <option value="Pendiente">Pendiente</option>
+                <option value="Pagado">Pagado</option>
+                <option value="Enviado">Enviado</option>
+            </select>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn-save">Crear Pedido</button>
+            <a th:href="@{/pedidos}" class="btn-back">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

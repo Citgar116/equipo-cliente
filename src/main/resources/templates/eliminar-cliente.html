@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Eliminación</title>
+</head>
+<body>
+
+<div class="card">
+    <h2>¿Eliminar Cliente?</h2>
+    <p>Estás a punto de eliminar a: <br>
+        <strong th:text="${cliente.nombre}">Nombre del Cliente</strong>
+    </p>
+    <p style="font-size: 0.9em; color: #888;">Esta acción no se puede deshacer.</p>
+
+    <a th:href="@{/clientes/eliminar/confirmar/{id}(id=${cliente.id_cliente})}" class="btn-confirm">Sí, eliminar</a>
+    <a th:href="@{/clientes}" class="btn-cancel">No, regresar</a>
+</div>
+
+</body>
+</html>

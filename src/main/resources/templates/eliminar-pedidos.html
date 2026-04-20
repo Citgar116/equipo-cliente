@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Eliminación de Pedido</title>
+</head>
+<body>
+
+<div class="card">
+    <h2 style="color: #c82333;">¿Eliminar Pedido?</h2>
+    <p>¿Seguro que deseas eliminar el pedido con ID: <br>
+        <span class="id-badge" th:text="${pedido.id_pedido}">001</span>
+    </p>
+    <p>Total del pedido: <strong th:text="'$' + ${pedido.total}">$0.00</strong></p>
+
+    <a th:href="@{/pedidos/eliminar/confirmar/{id}(id=${pedido.id_pedido})}" class="btn-confirm">Eliminar pedido</a>
+    <a th:href="@{/pedidos}" class="btn-cancel">Cancelar</a>
+</div>
+
+</body>
+</html>

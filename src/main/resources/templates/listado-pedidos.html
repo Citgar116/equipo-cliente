@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Pedidos</title>
+</head>
+<body>
+
+<h1>Gestión de Pedidos</h1>
+<a th:href="@{/pedidos/nuevo}" class="btn-add">+ Crear Nuevo Pedido</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID Pedido</th>
+        <th>ID Cliente</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pedido : ${pedidos}">
+        <td th:text="${pedido.id_pedido}"></td>
+        <td th:text="${pedido.id_cliente}"></td>
+
+        <td th:text="${#temporals.format(pedido.fecha, 'dd/MM/yyyy')}"></td>
+
+        <td th:text="'$' + ${#numbers.formatDecimal(pedido.total, 1, 2)}"></td>
+
+        <td>
+                    <span th:text="${pedido.estado}"
+                          th:classappend="${pedido.estado == 'Pendiente' ? 'status status-pendiente' : 'status status-pagado'}">
+                    </span>
+        </td>
+
+        <td>
+            <a th:href="@{/pedidos/actualizar/{id}(id=${pedido.id_pedido})}" class="btn-edit">Editar</a>
+            <a th:href="@{/pedidos/eliminar/{id}(id=${pedido.id_pedido})}" class="btn-delete">Eliminar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a th:href="@{/clientes}">Ver Listado de Clientes</a>
+
+</body>
+</html>
