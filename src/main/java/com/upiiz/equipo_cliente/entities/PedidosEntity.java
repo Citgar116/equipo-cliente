@@ -3,6 +3,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ public class PedidosEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_pedido;
     private Long id_cliente;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
     private Double total;
     private String estado;
@@ -23,6 +25,7 @@ public class PedidosEntity {
         this.id_pedido = id_pedido;
         this.total = total;
     }
+
 
     public PedidosEntity() {
     }
