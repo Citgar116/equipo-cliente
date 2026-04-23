@@ -32,17 +32,17 @@
           <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Nombre de usuario</a>
+          <a href="#" class="d-block" th:text="${usuario.nombre}">Nombre de usuario</a>
         </div>
       </div>
 
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
           <li class="nav-item"><a th:href="@{/auth/menu}" class="nav-link"><i class="nav-icon fas fa-home"></i><p>Inicio</p></a></li>
-          <li class="nav-item"><a th:href="@{/auth/listado-clientes}" class="nav-link"><i class="nav-icon fas fa-users"></i><p>Clientes</p></a></li>
-          <li class="nav-item"><a th:href="@{/auth/listado-pedidos}" class="nav-link"><i class="nav-icon fas fa-shopping-cart"></i><p>Pedidos</p></a></li>
+          <li class="nav-item"><a th:href="@{/clientes}" class="nav-link"><i class="nav-icon fas fa-users"></i><p>Clientes</p></a></li>
+          <li class="nav-item"><a th:href="@{/pedidos}" class="nav-link"><i class="nav-icon fas fa-shopping-cart"></i><p>Pedidos</p></a></li>
           <li class="nav-item"><a th:href="@{/auth/estadisticas}" class="nav-link active"><i class="nav-icon fas fa-chart-bar"></i><p>Estadísticas</p></a></li>
-          <li class="nav-item border-top mt-2"><a th:href="@{/logout}" class="nav-link"><i class="nav-icon fas fa-sign-out-alt text-danger"></i><p>Salir</p></a></li>
+          <li class="nav-item border-top mt-2"><a th:href="@{/auth/logout}" class="nav-link"><i class="nav-icon fas fa-sign-out-alt text-danger"></i><p>Salir</p></a></li>
         </ul>
       </nav>
     </div>
@@ -97,7 +97,7 @@
           <div class="col-md-6">
             <div class="card card-success card-outline">
               <div class="card-header border-0">
-                <h3 class="card-title">Estado de Entregas</h3>
+                <h3 class="card-title">Estado de Pedidos</h3>
               </div>
               <div class="card-body">
                 <canvas id="pedidosDonutChart" style="min-height: 250px; height: 250px;"></canvas>
@@ -120,15 +120,20 @@
 <script src="/plugins/chart.js/Chart.min.js"></script>
 <script src="/dist/js/adminlte.min.js"></script>
 
-<script>
+<script th:inline="javascript">
   $(function () {
+    var clEne = /*[[${clientesEne}]]*/ 0;
+    var clFeb = /*[[${clientesFeb}]]*/ 0;
+    var clMar = /*[[${clientesMar}]]*/ 0;
+    var clAbr = /*[[${clientesAbr}]]*/ 0;
+
     // --- GRÁFICAS DE CLIENTES ---
     // 1. Barras
     new Chart($('#clientesBarChart').get(0).getContext('2d'), {
       type: 'bar',
       data: {
         labels: ['Enero', 'Febrero', 'Marzo', 'Abril'],
-        datasets: [{ label: 'Nuevos Clientes', backgroundColor: '#007bff', data: [15, 28, 22, 35] }]
+        datasets: [{ label: 'Nuevos Clientes', backgroundColor: '#007bff', data: [clEne, clFeb, clMar, clAbr] }]
       },
       options: { maintainAspectRatio: false, responsive: true }
     });
@@ -155,11 +160,16 @@
     });
 
     // 4. Dona
+    var pagados = /*[[${pedidosPagados}]]*/ 0;
+    var pendientes = /*[[${pedidosPendientes}]]*/ 0;
+    var enviados = /*[[${pedidosEnviados}]]*/ 0;
+    var cancelados = /*[[${pedidosCancelados}]]*/ 0;
+
     new Chart($('#pedidosDonutChart').get(0).getContext('2d'), {
       type: 'doughnut',
       data: {
-        labels: ['Entregado', 'En Proceso', 'Cancelado'],
-        datasets: [{ data: [70, 20, 10], backgroundColor: ['#28a745', '#ffc107', '#dc3545'] }]
+        labels: ['Pagado', 'Pendiente', 'Enviado', 'Cancelado'],
+        datasets: [{ data: [pagados, pendientes, enviados, cancelados], backgroundColor: ['#28a745', '#ffc107', '#17a2b8', '#dc3545'] }]
       },
       options: { maintainAspectRatio: false, responsive: true }
     });

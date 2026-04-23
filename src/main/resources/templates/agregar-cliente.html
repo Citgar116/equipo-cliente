@@ -32,7 +32,7 @@
                     <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">Citla</a>
+                    <a href="#" class="d-block" th:text="${usuario.nombre}">Usuario</a>
                 </div>
             </div>
 
@@ -50,6 +50,19 @@
                             <p>Clientes</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a th:href="@{/pedidos}" class="nav-link">
+                            <i class="nav-icon fas fa-shopping-cart"></i>
+                            <p>Pedidos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/auth/estadisticas}" class="nav-link">
+                            <i class="nav-icon fas fa-chart-bar"></i>
+                            <p>Estadísticas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item border-top mt-2"><a th:href="@{/auth/logout}" class="nav-link"><i class="nav-icon fas fa-sign-out-alt text-danger"></i><p>Salir</p></a></li>
                 </ul>
             </nav>
         </div>
@@ -104,7 +117,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                             </div>
-                                            <input type="number" th:field="*{telefono}" class="form-control" id="telefono" placeholder="Número telefónico" required>
+                                            <input type="text" th:field="*{telefono}" class="form-control" id="telefono" placeholder="Número telefónico" required>
                                         </div>
                                     </div>
 

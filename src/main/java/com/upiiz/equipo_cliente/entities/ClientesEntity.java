@@ -12,12 +12,12 @@ public class ClientesEntity {
     private Long id_cliente;
     private String nombre;
     private String correo;
-    private int telefono;
+    private String telefono;
 
     public ClientesEntity() {
     }
 
-    public ClientesEntity(String correo, int telefono, String nombre, Long id_cliente) {
+    public ClientesEntity(String correo, String telefono, String nombre, Long id_cliente) {
         this.correo = correo;
         this.telefono = telefono;
         this.nombre = nombre;
@@ -48,11 +48,11 @@ public class ClientesEntity {
         this.nombre = nombre;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 }
